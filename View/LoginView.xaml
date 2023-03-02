@@ -39,6 +39,20 @@
             </Grid.RowDefinitions>
             <Border Background="#007DFA" CornerRadius="10,10,0,0" />
             <Button VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" Height="30"  Template="{StaticResource CloseButtonTemplate}"/>
+            <StackPanel VerticalAlignment="Bottom" Margin="0,0,0,30">
+                <Border Background="White"  VerticalAlignment="Center" HorizontalAlignment="Center" 
+                        CornerRadius="50" Margin="0,0,0,20">
+                    <Border.Effect>
+                        <DropShadowEffect Color="Gray" ShadowDepth="0" BlurRadius="5" Opacity="0.3" Direction="0"/>
+                    </Border.Effect>
+                    <Border Width="90" Height="90" HorizontalAlignment="Center">
+                        <Border.Background>
+                            <ImageBrush ImageSource="../Assets/Images/Login.png"/>
+                        </Border.Background>
+                    </Border>
+                </Border>
+                <TextBlock Text="WKK管理平台" HorizontalAlignment="Center" Foreground="White" FontSize="18"/>
+            </StackPanel>
         </Grid>
     </Border>
 </Window>
