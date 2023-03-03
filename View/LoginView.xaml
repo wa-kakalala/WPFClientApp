@@ -4,13 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientApp.View"
-        mc:Ignorable="d"
+        mc:Ignorable="d" Name="window"
         Title="LoginView" Height="600" Width="360"
         FontFamily="Microsoft YaHei" FontWeight="ExtraLight"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         WindowStyle="None" AllowsTransparency="True" Background="{x:Null}"
     >
     <Window.Resources>
+       
         <ControlTemplate TargetType="Button" x:Key="CloseButtonTemplate">
             <Border Background="Transparent" Name="back">
                 <Path Data="M0 0 12 12 M0 12 12 0" Stroke="White" StrokeThickness="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -21,6 +22,21 @@
                 </Trigger>
                 <Trigger Property="IsPressed" Value="True">
                     <Setter TargetName="back" Property="Background" Value="#ccff0000"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        
+        <ControlTemplate TargetType="Button" x:Key="LoginButtonTemplate">
+            <Border Background="#007dfa" CornerRadius="5">
+                <Grid>
+                    <Border CornerRadius="4" Background="#22ffffff" Name="back" Visibility="Hidden" />
+                    <ContentControl Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"
+                                VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Visibility" Value="Visible" TargetName="back"/>
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
@@ -170,10 +186,13 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1.8*"/>
                 <RowDefinition Height="3*"/>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
-            <Border Background="#007DFA" CornerRadius="10,10,0,0" />
-            <Button VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" Height="30"  Template="{StaticResource CloseButtonTemplate}"/>
+            <Border Background="#007DFA" CornerRadius="10,10,0,0" MouseLeftButtonDown="WinMove_LeftButtonDown"/>
+            <Button VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" Height="30"  
+                    Template="{StaticResource CloseButtonTemplate}"
+                    Command="{Binding CloseWindowCommand}"
+                    CommandParameter="{Binding ElementName=window}"/>
             <StackPanel VerticalAlignment="Bottom" Margin="0,0,0,30">
                 <Border Background="White"  VerticalAlignment="Center" HorizontalAlignment="Center" 
                         CornerRadius="50" Margin="0,0,0,20">
@@ -195,13 +214,14 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition MinHeight="23" Height="auto"/>
                 </Grid.RowDefinitions>
-                <TextBox FontSize ="16" Style="{DynamicResource UserNameTextBoxStyle}" Height="40"/>
-                <PasswordBox  FontSize ="16" Style="{DynamicResource PasswordBoxStyle1}" Grid.Row="1"  Height="40"/>
-                <TextBox FontSize ="16" Template="{DynamicResource ValidationCodeTextBoxStyle}" Grid.Row="2"  Height="40"/>
-                <Button Content="登录" Grid.Row="3"/>
-                <TextBlock Text="登录失败" Foreground="Red" Grid.Row="4"/>
+                <TextBox FontSize ="16" Text="{Binding LoginInfoModel.UserName}" Style="{DynamicResource UserNameTextBoxStyle}" Height="42"/>
+                <PasswordBox  FontSize ="16" Style="{DynamicResource PasswordBoxStyle1}" Grid.Row="1"  Height="42"/>
+                <TextBox FontSize ="16" Text="{Binding LoginInfoModel.ValidationCode }" Template="{DynamicResource ValidationCodeTextBoxStyle}" Grid.Row="2"  Height="42"/>
+                <Button Content="登  录" FontSize="16" Foreground="White" Grid.Row="3" Height="40" Template="{StaticResource LoginButtonTemplate}"/>
+                <TextBlock Text="登录失败" Foreground="Red" Grid.Row="4" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           TextWrapping="Wrap" LineHeight="22"/>
             </Grid>
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
@@ -219,11 +239,25 @@
                     <TextBlock Text="OR" Grid.Column="1" Foreground="#ccc" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
                 <UniformGrid Columns="5" Grid.Row="1" Margin="20,10">
-                    <Border Background="Gray"/>
+                    <UniformGrid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontFamily" Value="../Assets/Fonts/#iconfont" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="Foreground" Value="#dddddd" />
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="FontSize" Value="40" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="#007dfa"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </UniformGrid.Resources>
+                    <TextBlock Text="&#xe629;"  FontSize="30"/>
                     <Border/>
-                    <Border Background="Gray"/>
+                    <TextBlock Text="&#xe63c;"/>
                     <Border/>
-                    <Border Background="Gray"/>
+                    <TextBlock Text="&#xe62f;"/>
                 </UniformGrid>
             </Grid>
             

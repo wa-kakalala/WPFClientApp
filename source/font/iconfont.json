@@ -1,10 +1,31 @@
 {
   "id": "3928687",
-  "name": "no name",
+  "name": "WPFClientApp",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
   "description": "",
   "glyphs": [
+    {
+      "icon_id": "10304546",
+      "name": "qq",
+      "font_class": "qq1",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "579860",
+      "name": "微信",
+      "font_class": "weixin1",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "5699519",
+      "name": "微博",
+      "font_class": "weibo",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
     {
       "icon_id": "553324",
       "name": "验证 验证码",

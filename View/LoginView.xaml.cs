@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClientApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,17 @@ namespace ClientApp.View
         public LoginView()
         {
             InitializeComponent();
+            this.DataContext = new LoginViewModel();
+
+            // 绑定 DataContext   https://www.cnblogs.com/feipeng8848/p/11637108.html
+        }
+
+        private void WinMove_LeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.LeftButton== MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
         }
     }
 }
